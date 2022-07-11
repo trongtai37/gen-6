@@ -1,2 +1,2 @@
 # gen-6
-Homework
+thinhbka - student of MindX gen6
