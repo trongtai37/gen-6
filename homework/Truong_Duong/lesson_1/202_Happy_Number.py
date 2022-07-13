@@ -2,18 +2,18 @@
 
 class Solution:
     def isHappy(self, n: int) -> bool:
-        mset = {}
-
-        while n not in mset:
-            mset[n] = 1
+        def getNextVal(n):
             currentSum = 0
 
             while n != 0:
                 digit = n % 10
                 currentSum += digit * digit
                 n = n // 10
+            return currentSum
 
-            if currentSum == 1: return True
-            else: n = currentSum
+        mset = {}
+        while n not in mset:
+            mset[n] = 1
+            n = getNextVal(n)
 
-        return False
+        return n == 1
