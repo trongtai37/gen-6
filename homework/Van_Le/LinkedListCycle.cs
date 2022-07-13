@@ -3,6 +3,8 @@
 // The fast pointer will move two steps at a time
 // If there is no cycle, the fast one will eventually reach the end -> in this case, return false
 // If there is cycle, the fast one will eventually meet the slow one
+// Time complexity: O(n) with n is the length of the input linked list
+// Space complexity: O(1)
 
 public class LinkedListCycle
 {

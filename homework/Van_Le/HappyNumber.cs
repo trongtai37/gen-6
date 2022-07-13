@@ -2,6 +2,8 @@
 // Let's use two pointer
 // If there is a cycle, the fast pointer will meet 1 -> return true in this case
 // If there is no cycle, the fast pointer will meet the slow one -> return false in this case
+// Runtime complexity: O(logn) with n is the input
+// Space complexity: O(1)
 
 public class HappyNumber
 {
