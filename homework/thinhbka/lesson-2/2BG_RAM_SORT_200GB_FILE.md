@@ -13,9 +13,9 @@
 
 
 ### More specifix
-![devide big file into chunks, sort it](images/split.JPG)
+![devide big file into chunks, sort it](images/split.JPG)  
 Open big file, read chunks of data and sorted, therefore write it on disk. loop until we read out of big file
-![devide big file into chunks, sort it](images/merge.JPG)
+![devide big file into chunks, sort it](images/merge.JPG)  
 Merge these chunks file.
 
 Let size of big file is N and size of RAM is M  
