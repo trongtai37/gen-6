@@ -57,3 +57,4 @@ If we using heap, find the smallest take O(logK). Total running time of this ste
 
 => Total running time of process: **O (Nx(logM +logK)) = O(N*logMxK) = O(N*logN)**  
 
+Space:O(M) for read chunk data and sort,O(K) for storing tmp_arr => **O(M+N/M)**
