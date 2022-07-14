@@ -2,6 +2,8 @@
  * Created by Long Nguyen
  * Date: 10/07/2022 21:54
  */
+
+// https://leetcode.com/problems/range-sum-query-immutable/
 class NumArray {
     private int[] prefixSum;
 

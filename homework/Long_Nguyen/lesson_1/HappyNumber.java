@@ -5,6 +5,8 @@ import java.util.Set;
  * Created by Long Nguyen
  * Date: 10/07/2022 22:38
  */
+
+// https://leetcode.com/problems/happy-number/
 public class HappyNumber {
     private int next(int n) {
         int total = 0;
