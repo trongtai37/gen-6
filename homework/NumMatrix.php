@@ -40,28 +40,28 @@ class NumMatrix {
             if ($col1 == 0) {
                 return $this->sumMatrix[$row2][$col2];
             } else {
-                $n1 = 0;
+                $rectangle1 = 0;
             }
         } else {
-            $n1 = $this->sumMatrix[$row1 - 1][$col2];
+            $rectangle1 = $this->sumMatrix[$row1 - 1][$col2];
         }
 
         if ($col1 == 0) {
             if ($row1 == 0) {
                 return $this->sumMatrix[$row2][$col2];
             } else {
-                $n2 = 0;
+                $rectangle2 = 0;
             }
         } else {
-            $n2 = $this->sumMatrix[$row2][$col1 - 1];
+            $rectangle2 = $this->sumMatrix[$row2][$col1 - 1];
         }
         if ($row1 == 0 or $row2 == 0) {
-            $n3 = 0;
+            $rectangle3 = 0;
         } else {
-            $n3 = $this->sumMatrix[$row1 - 1][$col1 - 1];
+            $rectangle3 = $this->sumMatrix[$row1 - 1][$col1 - 1];
         }
 
-        return $this->sumMatrix[$row2][$col2] - $n1 - $n2 + $n3;
+        return $this->sumMatrix[$row2][$col2] - $rectangle1 - $rectangle2 + $rectangle3;
     }
 }
 
