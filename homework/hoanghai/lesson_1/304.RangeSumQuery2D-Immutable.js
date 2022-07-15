@@ -22,10 +22,10 @@
   * @return {number}
   */
  NumMatrix.prototype.sumRegion = function(row1, col1, row2, col2) {
-     let horizontalRec = sums[row2+1][col2+1];
-     let verticalRec = sums[row1][col2+1] + sums[row2+1][col1];
+     let outsideRec = sums[row2+1][col2+1];
+     let inside2smallRec = sums[row1][col2+1] + sums[row2+1][col1];
      let overlapRec = sums[row1][col1];
-     return horizontalRec - verticalRec + overlapRec;
+     return outsideRec - inside2smallRec + overlapRec;
  };
  
  /** 
