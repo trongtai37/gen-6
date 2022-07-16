@@ -1,0 +1,23 @@
+Question: Imagine you have a 200 GB file on disk, with one string per line. Explain how you would sort the file with only 2 GB RAM machine.
+
+
+Solution:
+
+We have
+Size of file: 200 GB
+Size of RAM: 20 GB
+
+In a moment, we can sort 1/10 of file. Therefore, ...
+
+  Step 1: Divide target file into 10 pieces (temporary files)
+    We have 10 temporary files that has size 20 GB (it's equal to size of RAM)
+
+  Step 2: We can sort 10 pieces, one by one.
+
+  Final: We have 10 sorted pieces,
+    and then merge them into 1 file
+    this is a result we need
+
+
+Running time (Big O notation): O((n/10)*(log[n]))
+Extra space: O(n)
