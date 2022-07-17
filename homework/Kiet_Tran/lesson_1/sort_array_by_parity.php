@@ -7,18 +7,20 @@ class Solution {
      * @return Integer[]
      */
     function sortArrayByParity(array $nums): array {
-        foreach ($nums as $index => $num) {
-            if ($num % 2 == 0) {
-                for ($i = 0; $i < $index; $i++) {
-                    if ($nums[$i] % 2 != 0) {
-                        $tmp = $nums[$i];
-                        $nums[$i] = $num;
-                        $nums[$index] = $tmp;
-                        break;
-                    }
-                }
+        $result = [];
+
+        for ($i = 0; $i < count($nums); $i++) {
+            if ($nums[$i] % 2 == 0) {
+                $result[] = $nums[$i];
             }
         }
-        return $nums;
+
+        for ($i = 0; $i < count($nums); $i++) {
+            if ($nums[$i] % 2 != 0) {
+                $result[] = $nums[$i];
+            }
+        }
+
+        return $result;
     }
 }

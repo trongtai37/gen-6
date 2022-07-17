@@ -11,22 +11,19 @@ class Solution {
             return true;
         }
 
-        $appeared = [];
-        while($n != 1 && !in_array($n, $appeared)) {
-            $appeared[] = $n;
-            $n = $this->getSumOfSquares($n);
+        $slow = $n;
+        $fast = $this->getSumOfSquares($n);
+        
+        while($fast != 1 && $slow != $fast) {
+            $slow = $this->getSumOfSquares($slow);
+            $fast = $this->getSumOfSquares($this->getSumOfSquares($fast));
         }
         
-        return ($n == 1) ? true : false;
+        return ($fast == 1) ? true : false;
     }
     
-    private function getNumberDigits(int $n): int {
-        $str = (string)$n;
-        return count(str_split($str));
-    }
-    
+    // Get next value
     private function getSumOfSquares(int $n): int {
-        $numberDigits = $this->getNumberDigits($n);
         $str = (string)$n;
         $sum = 0;
         foreach (str_split($str) as $d) {
