@@ -1,21 +1,14 @@
-function detectCycle(head: ListNode | null): ListNode | null {
+function hasCycle(head: ListNode | null): boolean {
   let slowPointer = head;
   let fastPointer = head;
 
   while (slowPointer && fastPointer) {
     slowPointer = slowPointer.next;
-    fastPointer = fastPointer.next?.next!;
-
-    // Floyd algorithm
+    fastPointer = fastPointer.next?.next;
     if (slowPointer === fastPointer) {
-      while (head !== slowPointer) {
-        head = head.next;
-        slowPointer = slowPointer.next;
-      }
+      return true;
     }
-
-    return head;
   }
 
-  return null;
+  return false;
 }
