@@ -26,21 +26,12 @@ public:
             cur = cur->next;
         }
 
-        while(left) {
+        if (left)
             cur->next = left;
-            left = left->next;
 
-            cur = cur->next;
-        }
-
-        while(right) {
+        if (right)
             cur->next = right;
-            right = right->next;
 
-            cur = cur->next;
-        }
-
-        cur->next = nullptr;
         return head->next;
     }
 

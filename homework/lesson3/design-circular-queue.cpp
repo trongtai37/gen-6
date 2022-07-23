@@ -8,7 +8,7 @@ public:
         if(isFull())
             return false;
 
-        q.push(value);
+        q.push_back(value);
 
         return true;
     }
@@ -17,7 +17,7 @@ public:
         if(isEmpty())
             return false;
 
-        q.pop();
+        q.erase(q.begin());
 
         return true;
     }
@@ -46,7 +46,7 @@ public:
 
 private:
     int queueLength = 0;
-    queue<int> q;
+    vector<int> q;
 };
 
 /**
