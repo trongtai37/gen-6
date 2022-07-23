@@ -32,9 +32,9 @@ class Child(Base):
         print("Child class")
 ```
 Different between Overriding and Overloading
-             Overloading                                                      Overriding
+             Overloading                                 \t                    Overriding
 
-1. Compile time Polymorphism                                            Run time Polymorphism
-2. Same name but different signatures                                   Same name, same signatures(input,return type...)
-3. No need at least two classes                                         Need at least two classes
+1. Compile time Polymorphism                             \t               Run time Polymorphism
+2. Same name but different signatures                     \t              Same name, same signatures(input,return type...)
+3. No need at least two classes                             \t            Need at least two classes
 
