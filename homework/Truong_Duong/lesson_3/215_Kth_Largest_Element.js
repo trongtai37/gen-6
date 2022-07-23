@@ -11,8 +11,8 @@ function swap(arr, i, j){
 }
 
 function partition(nums, left, right) {
-  boundary = left;
-  pivot = nums[right];
+  const boundary = left;
+  const pivot = nums[right];
 
   for (let i = left; i < right; i++) {
     if(nums[i] < pivot) {
@@ -27,13 +27,9 @@ function partition(nums, left, right) {
 function findKthLargestUtil(nums, pos, left, right) {
   const pivotIndex = partition(nums, left, right);
 
-  if (pivotIndex === pos) {
-    return nums[pos];
-  } else if (pivotIndex > pos) {
-    return findKthLargestUtil(nums, pos, left, boundary -1);
-  } else {
-    return findKthLargestUtil(nums, pos, boundary + 1, right);
-  }
+  if (pivotIndex === pos) return nums[pos];
+  if (pivotIndex > pos) return findKthLargestUtil(nums, pos, left, boundary -1);
+  return findKthLargestUtil(nums, pos, boundary + 1, right);
 }
 
 var findKthLargest = function(nums, k) {
