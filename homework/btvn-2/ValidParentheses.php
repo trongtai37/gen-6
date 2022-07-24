@@ -2,29 +2,27 @@
 
 class SimpleStack
 {
-    protected $queue = [];
+    protected $stack = [];
 
     public function push($data)
     {
-        var_dump($this->queue);
-        $this->queue[] = $data;
+        $this->stack[] = $data;
     }
 
     public function pop()
     {
-        var_dump($this->queue);
-        array_pop($this->queue);
+        array_pop($this->stack);
     }
 
     public function isEmpty()
     {
-        return empty($this->queue);
+        return empty($this->stack);
     }
 
     public function peek()
     {
-        if (!empty($this->queue)) {
-            return $this->queue[count($this->queue) - 1];
+        if (!empty($this->stack)) {
+            return $this->stack[count($this->stack) - 1];
         } else {
             return false;
         }
@@ -39,48 +37,45 @@ class ValidParentheses {
      * @return Boolean
      */
     function isValid($s) {
-        $queue = new SimpleStack();
+        $stack = new SimpleStack();
         $arrayS = str_split($s);
 
         foreach ($arrayS as $singleString)
         {
             if ($singleString == '(' or $singleString == '{' or $singleString == '[') {
-                $queue->push($singleString);
+                $stack->push($singleString);
             }
 
-            if ($singleString == '}' and $queue->peek() != '{') {
-                $queue->push($singleString);
+            if ($singleString == '}' and $stack->peek() != '{') {
+                $stack->push($singleString);
             }
 
-            if ($singleString == ']' and $queue->peek() != '[') {
-                $queue->push($singleString);
+            if ($singleString == ']' and $stack->peek() != '[') {
+                $stack->push($singleString);
             }
 
-            if ($singleString == ')' and $queue->peek() != '(') {
-                $queue->push($singleString);
+            if ($singleString == ')' and $stack->peek() != '(') {
+                $stack->push($singleString);
             }
 
 
-            if ($singleString == '}' and $queue->peek() == '{') {
-                $queue->pop();
+            if ($singleString == '}' and $stack->peek() == '{') {
+                $stack->pop();
             }
 
-            if ($singleString == ']' and $queue->peek() == '[') {
-                $queue->pop();
+            if ($singleString == ']' and $stack->peek() == '[') {
+                $stack->pop();
             }
 
-            if ($singleString == ')' and $queue->peek()== '(') {
-                $queue->pop();
+            if ($singleString == ')' and $stack->peek()== '(') {
+                $stack->pop();
             }
         }
 
-        return $queue->isEmpty();
+        return $stack->isEmpty();
     }
 }
 
 $test = new ValidParentheses;
 
-//var_dump($test->isValid("()[]{}"));
-//var_dump($test->isValid("()[]{}{"));
-//var_dump($test->isValid("([)]"));
 var_dump($test->isValid("{[]}"));
