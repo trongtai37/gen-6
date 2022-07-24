@@ -48,16 +48,12 @@ function mergeList(
     }
   }
 
-  while (head1) {
+  if (head1) {
     dummy.next = head1;
-    head1 = head1.next;
-    dummy = dummy.next;
   }
 
-  while (head2) {
+  if (head2) {
     dummy.next = head2;
-    head2 = head2.next;
-    dummy = dummy.next;
   }
 
   return res.next;
