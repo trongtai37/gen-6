@@ -30,7 +30,7 @@ In the above example,if the first two queries **(0)**, **(1)** has run successfu
 ### After transaction is committed, data is still in a valid state.(ie. Constraints)
 This means that integrity constraints must be maintained so that the database is consistent before and after the transaction. It refers to the correctness of a database. Referring to the example above,  
 - Total amount of payer and receiver before and after transaction must be maintained
-- After transaction, amount of payer never goes below zero
+- After transaction, amount of payer never goes below zero  
 Therefore, the database is ***consistent***. Inconsistency occurs in case T1 completes but T2 fails. As a result, T is incomplete. 
 
 
