@@ -38,4 +38,4 @@ Therefore, the database is ***consistent***.
 ### The statements are executed in a seemingly sequential way.
 Each transaction will run after previous tracsaction is complete!
 Isolation in the sense of ACID means that concurrently executing transactions are isolated from each other: **they cannot step on each other's toe**
-If they do, it may cause the [Concurrency problems (Race Conditions)](!https://cs50.harvard.edu/x/2022/notes/7/#problems)
+If they do, it may cause the [Concurrency problems (Race Conditions)](https://cs50.harvard.edu/x/2022/notes/7/#problems)
