@@ -33,3 +33,31 @@ class Solution:
 
 # Time complexity: O(logN * N**3)
 # Space O(1)
+
+
+#-------------------------------------------------
+class Solution:
+    def fourSum(self, nums, target):
+        n= len(nums)
+        nums.sort()
+        # print("hash table ",sum12)
+        ans = {}
+        for a in range(n):
+            for b in range(a+1,n):
+                s = nums[a] + nums[b]
+                L = b+1
+                R = n-1
+                while L<R:
+                    total = nums[L]+ nums[R] + s
+                    if  total== target:
+                        if (nums[a],nums[b],nums[L],nums[R]) not in ans:
+                            ans[(nums[a],nums[b],nums[L],nums[R])] = True
+                        L+=1
+                        R-=1
+                    elif total > target:
+                        R-=1
+                    else:
+                        L+=1
+                            
+        return list(ans.keys())
+#Time O(n**3), space 0
