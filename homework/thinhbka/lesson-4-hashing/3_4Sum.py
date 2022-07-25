@@ -36,12 +36,13 @@ class Solution:
 
 
 #-------------------------------------------------
+# Method 2: Using two pointers and hash table to check answer is unique or not
 class Solution:
     def fourSum(self, nums, target):
         n= len(nums)
         nums.sort()
         # print("hash table ",sum12)
-        ans = {}
+        ans = set()
         for a in range(n):
             for b in range(a+1,n):
                 s = nums[a] + nums[b]
@@ -51,7 +52,7 @@ class Solution:
                     total = nums[L]+ nums[R] + s
                     if  total== target:
                         if (nums[a],nums[b],nums[L],nums[R]) not in ans:
-                            ans[(nums[a],nums[b],nums[L],nums[R])] = True
+                            ans.add((nums[a],nums[b],nums[L],nums[R]))
                         L+=1
                         R-=1
                     elif total > target:
@@ -59,5 +60,5 @@ class Solution:
                     else:
                         L+=1
                             
-        return list(ans.keys())
-#Time O(n**3), space 0
+        return list(ans)
+#Time O(n**3), space O(1)
