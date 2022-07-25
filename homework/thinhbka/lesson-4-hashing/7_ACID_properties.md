@@ -31,9 +31,11 @@ In the above example,if the first two queries **(0)**, **(1)** has run successfu
 This means that integrity constraints must be maintained so that the database is consistent before and after the transaction. It refers to the correctness of a database. Referring to the example above,  
 - Total amount of payer and receiver before and after transaction must be maintained
 - After transaction, amount of payer never goes below zero  
-Therefore, the database is ***consistent***. Inconsistency occurs in case T1 completes but T2 fails. As a result, T is incomplete. 
+Therefore, the database is ***consistent***.   
 
 
-## Isolated  
+## Isolation  
 ### The statements are executed in a seemingly sequential way.
 Each transaction will run after previous tracsaction is complete!
+Isolation in the sense of ACID means that concurrently executing transactions are isolated from each other: **they cannot step on each other's toe**
+If they do, it may cause the [Concurrency problems (Race Conditions)](!https://cs50.harvard.edu/x/2022/notes/7/#problems)
