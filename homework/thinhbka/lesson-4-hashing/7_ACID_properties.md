@@ -56,5 +56,20 @@ Imagine two transactions concurrently try to udpate the same object in a databas
 >
 > Prevent dirty reads: One option would be to use same strategy like prevent dirty write. But this will make the application slow because one long-running write transaction can force many read-only transactions to
 wait until the long-running transaction has completed. This harms the response time of read-only transactions. For that reason, most databases prevent dirty reads using: rememeber both the old commmitted value and new value set by the transaction currently holds the write lock. While the transaction in ongoing, any other transactions that read the record are simply given the old value! Only when the new value is committed do transactions switch over to reading the new value.  
-#### 2. Snapshot Isolation and Repeatable Read   
 
+
+#### 2. Snapshot Isolation and Repeatable Read   
+Let's start with an example below:    
+
+![image](imgs/read-skew.JPG)    
+Alice has $1000 of saving at a bank, split across two account with $500 each. Now a transaction transfers $100 from one fo her accounts to the other. If she is unlucky enough to look at her list of account balances in the same moment as that transaction is being processed, se may see one account balance at a time before the incoming payment has arrived ($500), and the other account after outgoing transfer has been made ($400). To Alice now appears as though she only has total of $900 in her accounts - it seems that $100 has vanished into thin air. This is called **nonrepeatable read** for **read skew**. If Alice were to read the balance one again after then transaction transfer has been committed, she would see the incomming account with $600 and the other with $400. So, no need to worry if she reloads the online banking website few seconds later but.....   
+
+> Taking a backup requires making a copy of the entire database, which may take hours on a large database
+> 
+> Sometimes, you may want to run a query that scans over large parts of the database   
+
+
+#### Tobe continue.....
+
+## Durability
+Durability is the promise that once a transaction has committed successfully, any data it has written will not be forgotten, even if there is a hardware fault or the database crashes.  

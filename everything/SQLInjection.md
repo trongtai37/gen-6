@@ -2,7 +2,7 @@
   
   
   
-A SQL injection attack is when a malicious user enters SQL code as input on a site in order to bypass the sites security measures. For example, let’s say we have a table storing usernames and passwords, and then a login form on the home site of a page. We may search for the user using a query such as: 
+A SQL injection attack is when **a malicious user enters SQL code as input** on a site in order to bypass the sites security measures. For example, let’s say we have a table storing usernames and passwords, and then a login form on the home site of a page. We may search for the user using a query such as: 
 
 ```sql
 SELECT * FROM users
