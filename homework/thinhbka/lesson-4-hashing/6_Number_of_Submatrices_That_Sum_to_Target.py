@@ -52,4 +52,3 @@ class Solution:
                     dic[matrix_sum]+=1
         return ans
 
-
