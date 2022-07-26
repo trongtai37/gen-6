@@ -1,18 +1,16 @@
 //Solution for https://leetcode.com/problems/single-number/
 
-/*
+/**
  * @param {number[]} nums
  * @return {number}
  */
  var singleNumber = function(nums) {
-    const tmpArray = []
-    for(let i = 0; i < nums.length; i++) {
-        const index = tmpArray.findIndex((item) => item === nums[i])
-        if(index !== -1) {
-            tmpArray.splice(index, 1)
-        } else {
-            tmpArray.push(nums[i])
-        }
+    let res = nums[0]
+    for (let i = 1; i < nums.length; i++) {
+        res ^= nums[i]
     }
-    return tmpArray[0]
+    return res
 };
+
+//runtime O(n) with n is the length of the input array
+//space O(1) extra space

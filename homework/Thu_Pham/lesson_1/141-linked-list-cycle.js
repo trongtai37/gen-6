@@ -22,3 +22,6 @@
     }
     return false
 };
+
+//runtime O(n) with n is the length of the input linked list
+//space O(1) extra space
