@@ -43,12 +43,11 @@ class Solution:
         for y in range(h):
             for y1 in range(y,h):
                 dic = {0:1}
-                for x in range(n):
-                    matrix_sum = self.prefixSum2D[y1+1][x]-self.prefixSum2D[y+1][x]
+                for x in range(w):
+                    matrix_sum = self.prefixSum2D[y1+1][x+1]-self.prefixSum2D[y][x+1]
                     if matrix_sum-target in dic:
                         ans+= dic[matrix_sum-target]
                     if matrix_sum not in dic:
                         dic[matrix_sum] = 0
                     dic[matrix_sum]+=1
         return ans
-
