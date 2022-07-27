@@ -34,7 +34,12 @@ class Client:
     def create(self,petName):
         self.my_pet =  self.creator.create(petName)
         self.my_pet.say()
+if __name__ == "__main__":
+    client = Client("Harry",PetFactory())
+    client.create("Dog")
+    
 ```
 
 Comments:      
 - The client will not have access to the logic of code and the output represents the creation of html page.
+- This method hepls our code more readable, easy to maintain and explore. ie:In Future, we have add on some kind of Pets like Fish, Chiken.... etc, we dont have to change code from the Client, we just defined new class and customize code in the Factory!
