@@ -1,36 +1,29 @@
-from __future__ import annotations
-from abc import ABC,abstractmethod
 
+# classic implementation of Singleton Design pattern
+class Singleton:
 
-class Pet(ABC):
-    @abstractmethod
-    def say():
-        pass
-class Cat(Pet):
-    def say():
-        print("Cat goes: meowwww")
-class Dog(Pet):
-    def say():
-        print("Dog goes:Go go!")
-class Rabbit(Pet):
-    def say():
-        print("Rabbit goes:chwit chwit")
-class PetFactory:
-    def __init__(self) -> None:
-        self.petMaker = { "Cat":Cat,"Dog":Dog,"Rabbit":Rabbit}
+	__shared_instance = 'Singleton'
     
-    def create(self,type):
-        return self.petMaker[type]
+	@staticmethod
+	def getInstance():
+		"""Static Access Method"""
+		if Singleton.__shared_instance == 'Singleton':
+			Singleton()
+		return Singleton.__shared_instance
 
-class Client:
-    def __init__(self,name,creator) -> None:
-        self.name = name
-        self.creator = creator
-    def create(self,petName):
-        self.my_pet =  self.creator.create(petName)
-        self.my_pet.say()
+	def __init__(self):
+		"""virtual private constructor"""
+		if Singleton.__shared_instance != 'Singleton':
+			raise Exception("This class is a singleton class !")
+		else:
+			Singleton.__shared_instance = self
+# main method
 if __name__ == "__main__":
-    client = Client("Harry",PetFactory())
-    client.create("Dog")
-    
 
+	# create object of Singleton Class
+	obj = Singleton()
+	print(obj)
+
+	# pick the instance of the class
+	obj = Singleton.getInstance()
+	print(obj)
