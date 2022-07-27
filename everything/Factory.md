@@ -42,4 +42,4 @@ if __name__ == "__main__":
 
 Comments:      
 - The client will not have access to the logic of code and the output represents the creation of html page.
-- This method hepls our code more readable, easy to maintain and explore. ie:In Future, we have add on some kind of Pets like Fish, Chiken.... etc, we dont have to change code from the Client, we just defined new class and customize code in the Factory!
+- This method hepls our code more readable, easy to maintain and explore. ie:In Future, we have add on some kind of Pets like Fish, Chiken.... etc, we dont have to change code from the Client, we just defined new class which extends from Pet base class and customize code in the PetFactory class.
