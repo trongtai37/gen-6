@@ -1,7 +1,12 @@
-from __future__ import annotations
+# Factory Method
+### Identification:
+- One of the creational patterns.
+- Provides one of the best way to create an object
+- Objects are created without exposing the logic to the client. The client just only pass string to it!      
+![image](imgs/factory.JPG)
+
+```python
 from abc import ABC,abstractmethod
-
-
 class Pet(ABC):
     @abstractmethod
     def say():
@@ -29,8 +34,7 @@ class Client:
     def create(self,petName):
         self.my_pet =  self.creator.create(petName)
         self.my_pet.say()
-if __name__ == "__main__":
-    client = Client("Harry",PetFactory())
-    client.create("Dog")
-    
+```
 
+Comments:      
+- The client will not have access to the logic of code and the output represents the creation of html page.
