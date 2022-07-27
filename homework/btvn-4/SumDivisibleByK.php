@@ -10,21 +10,9 @@ class SumDivisibleByK
      */
     function subarraysDivByK($nums, $k)
     {
-        $count = 0;
         $prefixMod = $this->prefixMod($nums, $k);
 
-        $countMod = [];
-
-        foreach ($prefixMod as $singleMod) {
-            if ($singleMod == 0) {
-                $count++;
-            }
-            if (empty($countMod[$singleMod])) {
-                $countMod[$singleMod] = 1;
-            } else {
-                $countMod[$singleMod]++;
-            }
-        }
+        [$countMod, $count] = $this->hashMap($prefixMod);
 
         foreach ($countMod as $value) {
             $count = $count + $this->determineNumberOfPairs($value);
@@ -44,6 +32,24 @@ class SumDivisibleByK
         }
 
         return $nums;
+    }
+
+    public function hashMap($nums)
+    {
+        $countMod = [];
+        $count = 0;
+        foreach ($nums as $singleMod) {
+            if ($singleMod == 0) {
+                $count++;
+            }
+            if (empty($countMod[$singleMod])) {
+                $countMod[$singleMod] = 1;
+            } else {
+                $countMod[$singleMod]++;
+            }
+        }
+
+        return [$countMod, $count];
     }
 
     public function determineNumberOfPairs($n)
