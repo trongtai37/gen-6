@@ -21,3 +21,4 @@ WHERE username = "harry"--" AND password = "12345";
 Because in this query the password checking has been commented out, the hacker can log into Harry’s account without knowing their password. To solve this problem, we can use:  
 + Escape characters to make sure SQL treats the input as plain text and not as SQL code.
 + An abstraction layer on top of SQL which includes its own escape sequence, **so we don’t have to write SQL queries ourselves**.
+    > In Django, we can avoid SQL injection by using Django's Object Relation Mapping (**ORM**) layer. <span style="color:red">Django protects itself from SQL injection by using query parameterization </span>. [Detail here](https://www.stackhawk.com/blog/sql-injection-prevention-django/#how-do-you-mitigate-a-sql-injection)
