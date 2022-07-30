@@ -200,4 +200,50 @@ D: ReferenceError
 ## BigFrontend.dev problems
 
 - https://bigfrontend.dev/problem/implement-basic-debounce
+
+```js
+/**
+ * @param {(...args: any[]) => any} func
+ * @param {number} wait
+ * @returns {(...args: any[]) => any}
+ */
+function debounce(func, wait) {
+  let timeout = null;
+
+  return (args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout( () => {
+      func(args);
+    } , wait);
+  }
+}
+```
+
 - https://bigfrontend.dev/problem/implement-basic-throttle
+
+```js
+/**
+ * @param {(...args:any[]) => any} func
+ * @param {number} wait
+ * @returns {(...args:any[]) => any}
+ */
+function throttle(func, wait) {
+  let timer = null, lastArgs = null;
+
+  return function throttled(...args) {
+    if(!timer) {
+      func.apply(this, args);
+      timer = setTimeout(() => {
+        if(lastArgs) {
+          func.apply(this, lastArgs);
+          lastArgs = null;
+        }
+        timer = null;
+      }, wait)
+    } else {
+      lastArgs = args;
+    }
+  }
+}
+
+```

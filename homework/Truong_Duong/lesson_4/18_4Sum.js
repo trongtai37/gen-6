@@ -1,36 +1,38 @@
 // Solution for https://leetcode.com/problems/4sum/
-// IN_PROGRESS
 
-// const twoSum = (nums, i, j,hashMap, target, ans) => {
-//     for (let k = 0; k < nums.length; k++) {
-//         if(k === i || k === j) continue;
-//         const remaining = target - nums[k];
-//         if(remaining in hashMap) {
-
-//         }
-//     }
-// }
-
-// var fourSum = function (nums, target) {
-//     const hashMap = {}; // key: nums[i], value: frequency
-//     const ans = [];
-
-//     for (let num of nums) {
-//         if (num in hashMap) hashMap[num] += 1;
-//         else hashMap[num] = 1;
-//     }
-
-//     for (let i = 0; i < nums.length; i++) {
-//         for (let j = 0; j < nums.length; j++) {
-//             if (i === j) continue;
-//             hashMap[nums[i]] -= 1;
-//             hashMap[nums[j]] -= 1;
-//             const nextTarget = target - nums[i] - nums[j];
-//             twoSum(nums, i, j, hashMap, nextTarget, ans);
-//             hashMap[nums[i]] += 1;
-//             hashMap[nums[j]] += 1;
-//         }
-//     }
-
-//     return ans;
-// };
+var fourSum = function(nums, target) {
+    const ans = [];
+    nums.sort((x, y) => x- y);
+        
+    for(let i = 0; i < nums.length; i++){
+        const target2 = target - nums[i];
+        
+        for(let j = i + 1; j < nums.length; j++){
+            const target3 = target2 - nums[j];
+            
+            var front = j + 1;
+            var back = nums.length - 1;
+            
+            while(front < back){
+                const sum = nums[front] + nums[back];
+                if(sum < target3) front++;
+                else if(sum > target3) back--;
+                else{
+                    const temp = new Array(4);
+                    temp[0] = nums[i];
+                    temp[1] = nums[j];
+                    temp[2] = nums[front];
+                    temp[3] = nums[back];
+                    ans.push(temp);
+                    
+                    while(front < back && nums[front] === temp[2]) front++;
+                    while(front < back && nums[back] === temp[3]) back--;
+                }
+            }
+            
+            while(j + 1 < nums.length && nums[j + 1] === nums[j]) ++j;
+        }
+        while(i + 1 < nums.length && nums[i + 1] === nums[i]) ++i;
+    }
+    return ans;
+};
