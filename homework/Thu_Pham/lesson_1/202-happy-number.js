@@ -8,7 +8,7 @@ var isHappy = function(n) {
     let fastPointer = sumSquares(n)
     let slowPointer = n
     while (fastPointer !== 1 && fastPointer !== slowPointer) {
-        //O(n) with n is the number of fast pointer's steps until it reach 1 or slow pointer
+        //max loops it can reach is 1000
         fastPointer = sumSquares(sumSquares(fastPointer))
         slowPointer = sumSquares(slowPointer)
     }
@@ -18,7 +18,7 @@ var isHappy = function(n) {
 var sumSquares = function (n) {
     let sum = 0
     let digit
-    while (n >= 1) { //O(n) with n is the length of the param
+    while (n >= 1) { //O(log10(n))
         digit = n % 10
         n = Math.floor(n / 10)
         sum += digit * digit
@@ -26,5 +26,5 @@ var sumSquares = function (n) {
     return sum
 }
 
-//runtime O(n^2)
+//runtime O(1000 * log10(n))
 //space O(1) extra space
