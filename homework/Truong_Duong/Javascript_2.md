@@ -4,17 +4,17 @@
 
 ```js
 // Modify the below function
-function curry(f) {
-// do something
-    const argsList = [];
-    const fn =  function(a) {
-        if(argsList.length === f.length - 1) {
-            return f(...argsList, a);
-        }
-        argsList.push(a);
-        return fn;
+function curry(func) {
+
+  return function curried(...args) {
+    if (args.length >= func.length) {
+      return func.apply(this, args);
+    } else {
+      return function(...args2) {
+        return curried.apply(this, args.concat(args2));
+      }
     }
-    return fn;
+  };
 }
 
 // Do not modify the below function
@@ -33,18 +33,14 @@ curriedSum(1)(2); // returns 3
 // Modify the below function
 function memoize(func) {
     const cache = {};
+    return memorizeFn = function (...args) {
+        const key = args.join('');
 
-    const memorizeFn = function (a, b) {
-        if (cache[a] && cache[a][b]) {
-            return cache[a][b];
-        }
-        const result = func(a, b);
-        cache[a] = { ...cache[a] };
-        cache[a][b] = result;
+        if(key in cache) return cache[key];
+        const result = func.apply(this, args);
+        cache[key] = result;
         return result;
     };
-
-    return memorizeFn;
 }
 
 // Do not modify the below function
