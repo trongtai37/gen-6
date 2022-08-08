@@ -69,7 +69,31 @@ JS achieve asynchronous task by having Event Loops, Callback queue, and WebAPIs 
 
 **4. Explain Event Loop in detail.**
 
-<!-- TODO: -->
+The event loop concept is very simple. There’s an endless loop, where the JavaScript engine waits for tasks, executes them and then sleeps, waiting for more tasks.
+
+The general algorithm of the engine:
+
+1. While there are tasks:
+2. execute them, starting with the oldest task.
+   Sleep until a task appears, then go to 1.
+
+It may happen that a task comes while the engine is busy, then it’s enqueued.
+
+Along with macrotasks(tasks), there are microtasks.
+
+Microtasks come solely from our code. They are usually created by promises: an execution of `.then/catch/finally` handler becomes a microtask. Microtasks are used “under the cover” of await as well, as it’s another form of promise handling.
+
+To summary the detailed event loop algorithm:
+
+1. Dequeue and run the oldest task from the macrotask queue.
+2. Execute all microtasks:
+
+- While the microtask queue is not empty:
+  - Dequeue and run the oldest microtask.
+
+3. Render changes if any.
+4. If the macrotask queue is empty, wait till a macrotask appears.
+5. Go to step 1.
 
 **5. What's the output?**
 
