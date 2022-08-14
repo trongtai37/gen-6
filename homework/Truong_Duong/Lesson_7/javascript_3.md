@@ -74,6 +74,14 @@ console.log(flatten([arrays]))
 
 ```js
 // Your code here.
+function loop(initialValue, testFn, updateFn, bodyFn) {
+  let current = initialValue;
+
+  while(testFn(current)) {
+    bodyFn(current);
+    current = updateFn(current);
+  }
+}
 
 loop(3, n => n > 0, n => n - 1, console.log);
 // → 3
@@ -82,6 +90,39 @@ loop(3, n => n > 0, n => n - 1, console.log);
 ```
 
 **Question 4**: Write a function, deepEqual, that takes two values and returns true only if they are the same value or are objects with the same properties whose values are also equal when compared with a recursive call to deepEqual.
+
+```js
+function deepEqual(param1, param2) {
+  if (param1 === param2) return true;
+
+  if (param1 === null || param2 === null || typeof param1 !== 'object' || typeof param2 !== 'object') return false;
+
+  const param1Keys = Object.keys(param1);
+  const param2Keys = Object.keys(param2);
+
+  if (param1Keys.length !== param2Keys.length) return false;
+
+  for (const key of param1Keys) {
+    if (!(key in param2) || !deepEqual(param1[key], param2[key])) return false;
+  }
+
+  return true;
+}
+
+
+const param1 = {
+  a: '1',
+  b: { c: 1 }
+}
+const param2 = {
+  a: '1',
+  b: { d: 1 }
+}
+console.log(deepEqual(param1, param2));
+```
+
+- Reference: [Link](https://medium.com/analytics-vidhya/javascript-deep-comparison-of-objects-with-a-recursive-call-f67a8f37a343#:~:text=The%20function%20deepEqual%20takes%20in,object%20and%20are%20not%20null%20.)
+
 
 **Question 5**: What's the output?
 
@@ -100,6 +141,8 @@ B: false true true true
 C: true true false true
 D: true true true true
 
+> **Answer: C** Object keys in JS are strings by default, while `Set` have type differentiation, 1 is different with '1' in Set.
+
 **Question 6**: When you click the paragraph, what's the logged output?
 
 ```js
@@ -113,6 +156,8 @@ A: p div
 B: div p
 C: p
 D: div
+
+> **Answer: A** Event handler are executed in the bubbling phase, it go from deepest element to outer element.
 
 **Question 7**: What's the output?
 
@@ -131,6 +176,10 @@ A: undefined is 21 Lydia is 21
 B: function function
 C: Lydia is 21 Lydia is 21
 D: Lydia is 21 function
+
+> **Answer: D**
+> `call` will be executed immediately, bind `this` and arguments to the function
+> `bind` is not executed immedately, it just binding the value of `this` and arguments to the function and return a function
 
 **Question 8**: What does this return?
 
@@ -151,6 +200,9 @@ B: "two"
 C: "two" "one"
 D: "one" "two"
 
+> **Answer: B**
+> `Promise.race()` method returns a promise that fulfills or rejects as soon as one of the promises in an iterable fulfills or rejects, with the value or reason from that promise.
+
 **Question 9**: What's the output?
 
 ```js
@@ -170,6 +222,12 @@ A: 20, 40, 80, 160
 B: 20, 40, 20, 40
 C: 20, 20, 20, 40
 D: NaN, NaN, 20, 40
+
+> **Answer: C**
+> **Explain:** With the first and second call of multiply, since no param was passed, the default value was evaluate again each time, create a **copy** object of value `{...value}`, therefore the original value was not updated, and print out `20` each time
+> With the third and fourth call, we are now passing by reference to object value each time, then the original value was updated.
+
+> > If we didn't create a copy version of `value`, in case of no default value like this `const multiply = (x = value) => {}`, the value of the original object would be updated each time and print out `20 40 80 160`
 
 **Question 10**: With which constructor can we successfully extend the Dog class?
 
@@ -208,3 +266,5 @@ A: 1
 B: 2
 C: 3
 D: 4
+
+**Answer: B**
