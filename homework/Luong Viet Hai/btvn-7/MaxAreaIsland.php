@@ -20,8 +20,10 @@ class MaxAreaIsland
             foreach ($singleRow as $keyCol => $singleData) {
                 if(!isset($this->visited[$keyRow][$keyCol]))
                 {
-                    var_dump([$keyRow, $keyCol]);
-                    $this->dfs($keyRow, $keyCol, 0);
+                    $count = $this->dfs($keyRow, $keyCol, 0);
+                    if ($count > $this->max) {
+                        $this->max = $count;
+                    }
                 }
             }
         }
@@ -32,35 +34,27 @@ class MaxAreaIsland
     function dfs(int $roll, int $column, $count)
     {
         $this->visited[$roll][$column] = true;
-        if($this->grid[$roll][$count] == 1) {
-            $count = $count + 1;
+        if($this->grid[$roll][$column] == 1) {
+            $count = 1;
             for ($k = 0; $k < 4; $k++) {
                 $i = $roll + $this->dr[$k];
                 $j = $column + $this->dc[$k];
                 if ($i >= 0 and $i < $this->n and $j >= 0 and $j < $this->m and !isset($this->visited[$i][$j])) {
-                    $this->dfs($i, $j, $count);
+                    $count = $count + $this->dfs($i, $j, $count);
                 }
             }
 
-            if ($count > $this->max) {
-                $this->max = $count;
-            }
+            return $count;
         }
+
+        return 0;
     }
 }
 
 $test = new MaxAreaIsland;
 $maxArea = $test->maxAreaOfIsland(
-    [
-        [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-        [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0],
-        [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]
-    ]
+
+    [[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,1,1,0,1,0,0,0,0,0,0,0,0],[0,1,0,0,1,1,0,0,1,0,1,0,0],[0,1,0,0,1,1,0,0,1,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,1,1,0,0,0,0]]
 );
 
 print_r($maxArea);
