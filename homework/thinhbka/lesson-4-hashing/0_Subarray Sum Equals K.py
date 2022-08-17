@@ -123,3 +123,17 @@ class LRUCache:
             s+= str(cur)+"<------>"
             cur = cur.next
         return s
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        res = 0
+        s = 0
+        dic = {0:1}
+        for i in range(len(nums)):
+            s+=nums[i]
+            val = s-k
+            if val in dic:
+                res+=dic[val]
+            if s not in dic:
+                dic[s] = 0
+            dic[s]+=1
+        return res

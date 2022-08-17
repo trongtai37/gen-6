@@ -5,9 +5,11 @@ class Solution:
         cols = len(grid[0])
         visited = [[False for _ in range(cols)] for _ in range(rows)]
         step = [[0 for _ in range(cols)] for _ in range(rows)]
+        has_found_star = False
         for i in range(rows):
             for j in range(cols):
-                if grid[i][j] == "*":
+                if grid[i][j] == "*" and has_found_star is False:
+                    has_found_star = True
                     visited[i][j] = True
                     frontier = [(i,j)]
                     while frontier:

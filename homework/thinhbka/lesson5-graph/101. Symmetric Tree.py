@@ -2,13 +2,12 @@ LEFT = 0
 RIGHT = 1
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        frontier = [root]
-        # frontier.append(root)
-        while frontier:
+        queue = [root]
+        while queue:
             next = []
-            for i in range(len(frontier)):
-                node = frontier[i]
-                other_node = frontier[len(frontier)-1-i]
+            for i in range(len(queue)):
+                node = queue[i]
+                other_node = queue[len(queue)-1-i]
                 if node:
                     if other_node is None:
                         return False
@@ -21,7 +20,7 @@ class Solution:
                     next.append(node.left)
                     next.append(node.right)
             if all([x for x in next if x is not None]):
-                frontier = next
+                queue = next
             else:
-                frontier = []
+                queue = []
         return True
