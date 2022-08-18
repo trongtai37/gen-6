@@ -152,6 +152,9 @@ set.has(1);
 - C: p
 - D: div
 
+> Answer: A
+> The `click` event from paragraph happen and it's also bubbled to its parents too.
+
 **Question 7:** What's the output?
 
 ```javascript
