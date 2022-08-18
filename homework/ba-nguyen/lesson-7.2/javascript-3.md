@@ -95,8 +95,12 @@ function deepEqual<T1, T2>(value1: T1 | T2, value2: T1 | T2) {
     const newValue2 = value2.sort();
 
     return (
-      value1.length === value2.length &&
-      newValue1.every((item, index) => deepEqual(item, newValue2[index]))
+      keys1.length === keys2.length &&
+      keys1.every(
+        (item, index) =>
+          deepEqual(item, keys2[index]) &&
+          deepEqual(value1[item], value2[keys2[index]])
+      )
     );
   }
 
@@ -141,9 +145,9 @@ D: true true true true
 </div>
 ```
 
-A: p div <br />
+`A: p div` => Answer <br />
 B: div p <br />
-`C: p` => Answer <br />
+C: p <br />
 D: div
 
 **Explain:** Basically there are two event models in javascript. Event **capturing** and Event **bubbling**. In event bubbling, if you click on inside div, the inside div click event fired first and then the outer div click fired. while in event capturing, first the outer div event fired and than the inner div event fired
