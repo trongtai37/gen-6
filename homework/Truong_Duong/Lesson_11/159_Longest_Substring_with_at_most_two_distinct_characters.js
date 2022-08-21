@@ -14,17 +14,15 @@ var lengthOfLongestSubstringTwoDistinct = function (s) {
   while (right < N) {
     if (distinctCount <= 2) {
       ans = Math.max(ans, right - left + 1);
-
-      if (right + 1 < N) {
-        right += 1;
+      
+      right += 1;
+      if (right < N) {
         if (countMap[s[right]] >= 1) {
           countMap[s[right]] += 1;
         } else {
           countMap[s[right]] = 1;
           distinctCount += 1;
         }
-      } else {
-        break;
       }
     } else {
       countMap[s[left]] -= 1;
@@ -35,3 +33,4 @@ var lengthOfLongestSubstringTwoDistinct = function (s) {
 
   return ans;
 };
+
