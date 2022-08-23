@@ -7,3 +7,27 @@ Naive mark-and-sweep in action on a **heap** containing eight objects. Arrows re
 Garbage collection (GC) is a memory recovery feature built into programming languages such as C# and Java. A GC-enabled programming language includes one or more garbage collectors (GC engines) that **automatically free up memory space that has been allocated to objects no longer needed by the program**. The reclaimed memory space can then be used for future object allocations within that program.
 
 In older programming languages like C and C++, developers must manually delete objects and free up memory. Replying on manual proccess made it easy to raise the bugs into the code, some of which can have serious consequences. For example, if a developer forget to free up memory, it could leading to memory leak problem.
+
+## mark-sweep algorithm  
+```py
+- Collect all root objects
+- Mark all live ojbects in heap pool as Unreachable
+- for node in root object collection:
+    Mark(node)
+
+Mark(node):
+    markedBit(node) is True
+    for each v referenced by node:
+        if markedBit(v) is True:
+            Mark(v)
+Sweep():
+    for each object in live objects:
+        if marketBit(object) is True:
+            marketBit(object) = False
+        else:
+            release object from heap pool
+Main():
+    - for node in root object collection:
+        Mark(node)
+    Sweep()
+```
