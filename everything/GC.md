@@ -31,3 +31,12 @@ Main():
         Mark(node)
     Sweep()
 ```
+
+
+### Advantages of Mark and Sweep Algorithm:
+* It handles the case with **cyclic references**, even in the case of a cycle, this algorithm never ends up in an infinite loop.
+* There are no additional overheads incurred during the execution of the algorithm.
+
+### Disadvantages of the Mark and Sweep Algorithm:
+* The main disadvantage of the mark-and-sweep approach is the fact that  normal program execution is suspended while the garbage collection algorithm runs.
+* May cause the **OutOfMemory error** when allocate new object (or Fragmentation Failure).
