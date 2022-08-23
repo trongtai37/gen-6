@@ -119,12 +119,16 @@ console.log(/* 1 */); // Do you love JavaScript?
 console.log(/* 2 */); // JavaScript loves you back ❤️
 ```
 
-- A: `game.next("Yes").value` `and game.next().value`
+- A: `game.next("Yes").value` and `game.next().value`
 - B: `game.next.value("Yes")` and `game.next.value()`
 - C: `game.next().value` and `game.next("Yes").value`
 - D: `game.next.value()` and `game.next.value("Yes")`
 
-> Answer: TODO
+> Answer: C
+> `game` variable is a generator, to log the value of the first `yield` statement, we use `game.next([param]).value`
+> The `answer` variable will be the param of the `next()` call;
+> The next `next()` call will execute the next line after yield statement. To return `JavaScript loves you back ❤️`,
+> `answer` must be != `Yes`
 
 **Question 5:** What's the output?
 
