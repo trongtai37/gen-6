@@ -1,20 +1,8 @@
 edges = []
 edges.append(["a","b"])
 edges.append(["b","c"])
-edges.append(["c","d"])
-edges.append(["d","a"])
-edges.append(["d","e"])
-edges.append(["c","e"])
-edges.append(["e","c"])
-edges.append(["e","f"])
-edges.append(["f","g"])
-edges.append(["g","f"])
-edges.append(["f","i"])
-edges.append(["i","f"])
-edges.append(["i","g"])
-edges.append(["g","h"])
-edges.append(["h","j"])
-edges.append(["j","i"])
+edges.append(["a","d"])
+edges.append(["d","c"])
 CNT = 1
 def kosaraju(edges):
     Adj = {}
@@ -88,4 +76,4 @@ def tajan_method(edges):
     print(num)
     print(low)
 kosaraju(edges)
-tajan_method(edges)
+# tajan_method(edges)
