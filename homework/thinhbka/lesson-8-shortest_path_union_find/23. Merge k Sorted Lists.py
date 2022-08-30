@@ -17,3 +17,4 @@ class Solution:
                 node = node.next
                 h.heappush(tmp,(node.val,index,node))
         return root.next
+        
