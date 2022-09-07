@@ -1,5 +1,5 @@
 # Monotonic Stack/Deque - Ngăn xếp, hàng đợi 2 đầu đơn điệu.
-- Stack hoặc deque này sẽ chứa danh sách các phần tử luôn tăng hoặc luôn giảm được gọi là stack/deque đơn điệu.     
+- Stack hoặc deque này sẽ chứa danh sách các phần tử **luôn tăng** hoặc **luôn giảm** được gọi là stack/deque đơn điệu.     
 Ví dụ cho 1 stack đơn điệu giảm 
 
 ```py
@@ -7,7 +7,7 @@ stack = [9,7,3,2,1,-1]
 ```
 ![image](imgs/monotonic_stack.png)  　
 <hr>
-Trước khi thêm 1 phần tử element mới vào stack, ta sẽ phải check việc thêm element này có phá vỡ điều kiện stack đơn điệu hay không? Nếu có, pop phần tử cuối ra cho tới khi nào thỏa mãn. Cuối cùng, add phần tử này vào stack. 
+> Trước khi thêm 1 phần tử element mới vào stack, ta sẽ phải check việc thêm element này có phá vỡ điều kiện stack đơn điệu hay không? Nếu có, pop phần tử cuối ra cho tới khi nào thỏa mãn. Cuối cùng, add phần tử này vào stack. 
 
 
 
@@ -48,14 +48,14 @@ Yeah, ngoài ra, stack đơn điệu thay vì lưu element thì có thể lưu i
 
 Một số bài toán liên quan có thể giải bằng Monotonic stack:         
 Easy:      
-496. Next Greater Element I   
-1475. Final Prices With a Special Discount in a Shop     
+[496.](https://leetcode.com/problems/next-greater-element-i/) Next Greater Element I   
+[1475.](https://leetcode.com/problems/final-prices-with-a-special-discount-in-a-shop/) Final Prices With a Special Discount in a Shop     
 Medium:       
-739. Daily Temperatures     
-503. Next Greater Element II
-907. Sum of Subarray Minimums     
+[739.](https://leetcode.com/problems/daily-temperatures/) Daily Temperatures     
+[503.](https://leetcode.com/problems/next-greater-element-ii/) Next Greater Element II
+[907.](https://leetcode.com/problems/sum-of-subarray-minimums/) Sum of Subarray Minimums     
 
-> Ngoài ra khi thay stack bởi deque, ta có thể  pop left phần tử  đầu tiên của deque khi gặp 1 điều kiện nào đó. Ví dụ bài 239. Sliding Window Maximum     
+> Ngoài ra khi thay stack bởi deque, ta có thể  pop left phần tử  đầu tiên của deque khi gặp 1 điều kiện nào đó. Ví dụ bài [239.](https://leetcode.com/problems/sliding-window-maximum/) Sliding Window Maximum     
 ```py
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
