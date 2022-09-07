@@ -79,3 +79,8 @@ class Solution:
         return r
 ```
 
+Nguồn:   
+[VNOI](https://vnoi.info/wiki/algo%2Fdata-structures%2FStack.md?redirected_from=translate%2Fdata-structures%2FStack.md#stack-%C4%91%C6%A1n-%C4%91i%E1%BB%87u "stack đơn điệu")
+
+[algo monster](https://algo.monster/problems/mono_stack_intro "algo monster")
+[Minimum stack / Minimum queue](https://cp-algorithms.com/data_structures/stack_queue_modification.html)
