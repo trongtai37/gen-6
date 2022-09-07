@@ -27,7 +27,7 @@ def mono_stack(arr):
         stack.append(element)
 
 
-        
+
 dry run với arr = [3,1,6,2,5,4]
 1.e = arr[0] = 3 -> stack =[3]
 2.e = arr[1] = 1 -> 1 bé hơn phần tử ở đỉnh stack, add 1 vào đỉnh stack -> stack =[3,1]
@@ -42,9 +42,40 @@ dry run với arr = [3,1,6,2,5,4]
         5 < 6, không vi phạm. thêm 5 vào stack. (stack =[6,5])
 6. e = arr[5] = 4 -> 4 < 5, không vi phạm, ta thêm 4 vào stack. stack =[6,5,4]         
 ```
-Kỹ thuật này giải được một lớp bài toán mà yêu cầu các phần tử thêm vào theo thứ tự. 
-Easy:
-496. Next Greater Element I
-Medium:
-739. Daily Temperatures
+
+Yeah, ngoài ra, stack đơn điệu thay vì lưu element thì có thể lưu index của element đó. Miễn sao stack maintain 1 danh sách đơn điệu là được.  
+
+
+Một số bài toán liên quan có thể giải bằng Monotonic stack:         
+Easy:      
+496. Next Greater Element I   
+1475. Final Prices With a Special Discount in a Shop     
+Medium:       
+739. Daily Temperatures     
 503. Next Greater Element II
+907. Sum of Subarray Minimums     
+
+> Ngoài ra khi thay stack bởi deque, ta có thể  pop left phần tử  đầu tiên của deque khi gặp 1 điều kiện nào đó. Ví dụ bài 239. Sliding Window Maximum     
+```py
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        r = []
+        q = collections.deque([])
+        
+        
+        for i in range(len(nums)):
+            while q and nums[q[-1]] <= nums[i]:
+                q.pop()
+
+        
+            # Chỗ code xử lý logic của chúng ta    
+            q.append(i) # q thay vì chứ nums[i] thì chứa chỉ mục i
+            if i>=k-1:
+                if q[0]==i-k:#do phải duy trì sliding window size k, kiểm tra đoạn [q[0],i] có dài hơn k hay không
+                    q.popleft() 
+                r.append(nums[q[0]])
+
+
+        return r
+```
+
