@@ -94,6 +94,65 @@ function byTagName<T extends keyof HTMLElementTagNameMap>(
 
 **Question 3:**
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <tab-panel>
+      <div data-tabname="one">Tab one</div>
+      <div data-tabname="two">Tab two</div>
+      <div data-tabname="three">Tab three</div>
+    </tab-panel>
+    <script>
+      function asTabs(node) {
+        const tabPanes = [];
+        for (const child of node.childNodes.values()) {
+          if (child instanceof HTMLElement) {
+            const name = child.getAttribute('data-tabname');
+            if (name) {
+              tabPanes.unshift(child);
+            }
+          }
+        }
+
+        function showTabPane(name) {
+          for (const tabPane of tabPanes) {
+            const tabName = tabPane.getAttribute('data-tabname');
+            if (tabName === name) {
+              tabPane.style.display = 'block';
+            } else {
+              tabPane.style.display = 'none';
+            }
+          }
+        }
+
+        for (const tabPane of tabPanes) {
+          const tabName = tabPane.getAttribute('data-tabname');
+          const tabButton = document.createElement('button');
+          tabButton.innerText = tabName;
+          tabButton.addEventListener('click', () => {
+            showTabPane(tabName);
+          });
+          node.prepend(tabButton);
+        }
+
+        const firstTabName = tabPanes
+          .reverse()[0]
+          ?.getAttribute('data-tabname');
+        showTabPane(firstTabName);
+      }
+      asTabs(document.querySelector('tab-panel'));
+    </script>
+  </body>
+</html>
+```
+
 **Question 4:**
 
 ```css
@@ -108,16 +167,27 @@ input[type='range'] {
 const myPromise = Promise.resolve(Promise.resolve('Promise'));
 
 function funcOne() {
-  setTimeout(() => console.log('Timeout 1!'), 0);
-  myPromise.then((res) => res).then((res) => console.log(`${res} 1!`));
+  setTimeout(
+    // Start: Block1
+    () => console.log('Timeout 1!'),
+    // End: Block1
+    0
+  );
+  myPromise
+    // Start: Block2
+    .then((res) => res)
+    .then((res) => console.log(`${res} 1!`));
+  // End: Block2
   console.log('Last line 1!');
 }
 
 async function funcTwo() {
   const res = await myPromise;
+  // Start: Block3
   console.log(`${res} 2!`);
   setTimeout(() => console.log('Timeout 2!'), 0);
   console.log('Last line 2!');
+  // End: Block3
 }
 
 funcOne();
@@ -130,6 +200,25 @@ funcTwo();
 - D: Timeout 1! Promise 1! Last line 1! Promise 2! Timeout 2! Last line 2!
 
 > Answer C
+> The JS engine automatically optimizes the Promise.resolve Chaining, so we can rewrite
+> `const myPromise = Promise.resolve('Promise')`
+> On async function, all statements after await can be considered as a then block, async function return a Promise as well.
+>
+> Code will run line by line, from top to bottom. It obviously log `Last line 1!` first and when it reach and complete the last line,
+> Our Macrotask and Microtask will be:
+> Macrotask: `Block1`
+> Microtask: `Block2`, `Block3`
+>
+> Our callstack is empty so eventloop will pick the first item from Microtask,
+> after `Block2` run, our Macrotask and Microtask will be:
+> Macrotask: `Block1`
+> Microtask: `Block3`, ` .then((res) => console.log(``${res} 1!``)); `
+> after `Block3` run, `Promise 2`, `Last line 2` are logged, `() => console.log('Timeout 2!')` is added to Macrotask , our Macrotask and Microtask will be:
+> Macrotask: `() => console.log('Timeout 1!')`, `() => console.log('Timeout 2!')`
+> Microtask: ` .then((res) => console.log(``${res} 1!``)); `
+> When Microtask run and emmpty, Macrotask will be run as a queue.
+
+> Output: Last line 1! -> Promise 2! -> Last line 2! -> Promise 1! -> Timeout 1! -> Timeout 2!
 
 **Question 6:** How can we invoke sum in sum.js from index.js?
 
@@ -149,6 +238,7 @@ import * as sum from './sum';
 - D: Default aren't imported with \*, only named exports
 
 > Answer C
+> The `import *` syntax will import the `namespace` of the file (module), which includes `default`
 
 **Question 7:** What's the output?
 
@@ -160,8 +250,8 @@ const handler = {
 
 const person = new Proxy({}, handler);
 
-person.name = 'Lydia';
-person.name;
+person.name = 'Lydia'; // get a property
+person.name; // set a property
 ```
 
 - A: Added a new property!
@@ -179,12 +269,18 @@ const person = { name: 'Lydia Hallie' };
 Object.seal(person);
 ```
 
-- A: person.name = "Evan Bacon"
-- B: person.age = 21
-- C: delete person.name
-- D: Object.assign(person, { age: 21 })
+- A: person.name = "Evan Bacon" -> change value of property name
+- B: person.age = 21 -> add a new property age
+- C: delete person.name -> delete a property
+- D: Object.assign(person, { age: 21 }) -> Object.assign mutate person object, not allowed
 
 > Answer A
+> `Object.seal()` seals an object that prevents object from extending and makes existing properties no-configurable.
+>
+> - Can not add new property
+> - Can not delete a property
+> - Can not config property
+> - Can change value of the property as long as it is writable
 
 **Question 9:** What's the output?
 
@@ -233,3 +329,5 @@ console.log(counter.#number);
 - D: SyntaxError
 
 > Answer D
+> The convention `#variable` indicates the `variable` is private and it can only be accessed by class's method.
+> It also affects at runtime as well, so program return Syntax Error.
