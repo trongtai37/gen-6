@@ -31,5 +31,4 @@ class Solution:
                 return dp[n][m]
             dp[n][m] = max(LCS(s1,s2,n-1,m),LCS(s1,s2,n,m-1))
             return dp[n][m]
-        
         return LCS(s1,s2,n,m)

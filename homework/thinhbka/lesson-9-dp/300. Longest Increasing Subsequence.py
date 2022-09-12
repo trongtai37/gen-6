@@ -7,4 +7,9 @@ class Solution:
                 if nums[j] > nums[i]:
                     dp[j] = max(dp[j],dp[i]+1)
         return max(dp)
-            
+        
+        [1,3,5,4,7] 
+        # 1 -> 3,4,5,7
+        # 3 -> 5 4 7
+        # 4 -> 7
+        # 7 -> []
